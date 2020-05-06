@@ -8,7 +8,7 @@
   >
     <template slot-scope="{ toggle, isToggled }">
       <router-link v-popover:popover1 class="navbar-brand" to="/">
-       Youtube To Mp3
+       You3
       </router-link>
     </template>
   </navbar>
