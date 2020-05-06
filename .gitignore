@@ -358,6 +358,6 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # End of https://www.gitignore.io/api/react,rider,aspnetcore
-back/node/youtube-to-mp3/downloaded/
-
-back/node/youtube-to-mp3/converted/
+back/you3/downloaded/
+back/you3/converted/
+back/you3/node_modules/
