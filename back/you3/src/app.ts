@@ -1,15 +1,12 @@
-const WebSocket = require('ws');
-const Converter = require('./converter/download-video');
-const Fs = require('fs');
-var Blob = require('blob');
-
-
+import WebSocket from "ws";
+import Fs from "fs";
+import {VideoConverter} from "./converter/video-converter";
 const wss = new WebSocket.Server({port: 8080});
 
-MessageTypes = {
-    convert: "convert",
-    resultFileName:"resultFileName"
-};
+export enum MessageTypes {
+    convert = "convert",
+    resultFileName = "resultFileName"
+}
 
 console.log('server is listening');
 
@@ -17,7 +14,7 @@ wss.on('connection', function connection(ws, req) {
     const ip = req.connection.remoteAddress;
     console.log(ip + ' connected');
 
-    ws.on('message', function incoming(message) {
+    ws.on('message', function incoming(message:any) {
         message = JSON.parse(message);
         if (message.type === MessageTypes.convert) {
             convertVideo(message.payload, ws)
@@ -29,17 +26,20 @@ wss.on('connection', function connection(ws, req) {
     });
 });
 
-function convertVideo(url, ws) {
+function convertVideo(url: string, ws: WebSocket) {
     console.log('url to convert is %s', url);
-    Converter.getfilename(url).then((filename) => {
+    VideoConverter.getfilename(url).then((filename) => {
 
-        Converter.downloadFile(url, filename).then((convertedFilePath) => {
+        VideoConverter.downloadFile(url, filename).then((convertedFilePath) => {
             console.log('converted filepath is %s', convertedFilePath);
-            Fs.readFile(convertedFilePath.replace('\n',''), (err, data) => {
+            Fs.readFile(convertedFilePath.replace('\n', ''), (err, data) => {
                 if (err) {
                     console.log(err)
                 }
-                ws.send(JSON.stringify({type:MessageTypes.resultFileName, payload:filename.replace('.webm','.mp3')}));
+                ws.send(JSON.stringify({
+                    type: MessageTypes.resultFileName,
+                    payload: filename.replace('.webm', '.mp3')
+                }));
                 ws.send(data);
             });
         })
