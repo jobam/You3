@@ -1,14 +1,15 @@
 import WebSocket from "ws";
 import Fs from "fs";
 import {VideoConverter} from "./converter/video-converter";
-const wss = new WebSocket.Server({port: 8080});
+const port = 8080;
+const wss = new WebSocket.Server({port: port});
 
 export enum MessageTypes {
     convert = "convert",
     resultFileName = "resultFileName"
 }
 
-console.log('server is listening');
+console.log('server is listening on port %s', port);
 
 wss.on('connection', function connection(ws, req) {
     const ip = req.connection.remoteAddress;
