@@ -1,12 +1,18 @@
 {
-  "name": "youtube-to-mp3",
+  "name": "you3",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "npm run build && node build/app.js",
+    "build": "rimraf ./build && tsc"
   },
   "dependencies": {
     "blob": "^0.1.0",
     "ws": "^7.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^13.13.5",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
   }
 }

@@ -361,3 +361,5 @@ fabric.properties
 back/you3/downloaded/
 back/you3/converted/
 back/you3/node_modules/
+
+back/you3/build/

@@ -1,7 +1,14 @@
-var process = require('child_process');
+import process from "child_process";
 
 const downloaderCommand = 'youtube-dl';
-const destDirectory = './converted';
+const destDirectory = '../converted';
+
+
+// export class Converter{
+//   public getfilename(url){
+//
+//   }
+// }
 
 module.exports = {
   getfilename: function (url) {
