@@ -5,7 +5,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-COPY ./build .
+COPY build .
 
 RUN apk add python
 RUN  wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
