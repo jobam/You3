@@ -72,8 +72,7 @@ export default {
       this.isLoading = true;
 
         this.ws = new WebSocket(process.env.VUE_APP_API_URL);
-        console.log(this.ws);
-        if (!this.ws.readyState){
+        if (this.ws.readyState === WebSocket.CLOSED){
           console.error('cannot contact server');
           this.isLoading = false;
         }
