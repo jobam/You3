@@ -1,6 +1,7 @@
 import WebSocket from "ws";
 import Fs from "fs";
 import {VideoConverter} from "./converter/video-converter";
+
 const port = 8080;
 const wss = new WebSocket.Server({port: port});
 
@@ -15,7 +16,7 @@ wss.on('connection', function connection(ws, req) {
     const ip = req.connection.remoteAddress;
     console.log(ip + ' connected');
 
-    ws.on('message', function incoming(message:any) {
+    ws.on('message', function incoming(message: any) {
         message = JSON.parse(message);
         if (message.type === MessageTypes.convert) {
             convertVideo(message.payload, ws)
@@ -30,7 +31,8 @@ wss.on('connection', function connection(ws, req) {
 function convertVideo(url: string, ws: WebSocket) {
     console.log('url to convert is %s', url);
     VideoConverter.getfilename(url).then((filename) => {
-
+        console.log('1. Getting Filename ' + filename);
+        console.log('2. Downloading and Converting');
         VideoConverter.downloadFile(url, filename).then((convertedFilePath) => {
             console.log('converted filepath is %s', convertedFilePath);
             Fs.readFile(convertedFilePath.replace('\n', ''), (err, data) => {

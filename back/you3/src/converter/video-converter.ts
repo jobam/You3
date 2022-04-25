@@ -39,7 +39,7 @@ export class VideoConverter {
                     return;
                 }
                 console.log(`stdout: ${stdout}`);
-                resolve(destFilePath.replace('.webm', '.mp3'));
+                resolve(destFilePath.replace('.m4a', '.mp3'));
             });
         });
     }
